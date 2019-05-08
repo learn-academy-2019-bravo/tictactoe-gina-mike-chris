@@ -18,7 +18,7 @@ class Board extends Component{
 //click square populates with this.state player1. alternate between players
 //destructure state. if gamestatus is not in progress, perform handleClick function. created conditionals check if spacesLeft is odd and square is empty, add 'X' and decrease spacesLeft by 1. otherwise, spacesleft is even and square is empty, add 'O' and decrease spacesleft by 1.
   handleClick = (squareIndex) => {
-      let { spaces, player1, player2, counter, spacesLeft, gameStatus } = this.state
+      let { spaces, player1, player2, spacesLeft, gameStatus } = this.state
 
       if (gameStatus != "in progress"){
           return
@@ -34,19 +34,19 @@ class Board extends Component{
 
       this.setState({ spaces })
 
-      this.setState({gameStatus: "in progress"})
+      // this.setState({gameStatus: "in progress"})
       this.winningPlayer( spaces )
       }
   }
     //create method for winner.  destructure state.
-    checkWinner = (string) => {
-        const {gameStatus} = this.state
-        if(gameStatus === "Won") {
-            setTimeout(function(){ alert("You Win");}, 100)
-        } else{
-            return
-        }
-    }
+    // checkWinner = (string) => {
+    //     const {gameStatus} = this.state
+    //     if(gameStatus === "Won") {
+    //         setTimeout(function(){ alert("You Win");}, 100)
+    //     } else{
+    //         return
+    //     }
+    // }
 
     loadGame = () => {
         window.location.reload()
@@ -70,7 +70,7 @@ class Board extends Component{
             this.setState({gameStatus: "unstarted"})
         } else if ( spacesLeft === 1) {
             setTimeout(function(){ alert("You Tied");}, 100)
-            this.setState({gameStatus: "unstarted"})
+            this.setState({gameStatus: "ended"})
         }  else {
          return
         }
@@ -115,8 +115,8 @@ class Board extends Component{
             <button onClick={this.loadGame}> Reset Button </button>
         </div>
         <h1>Welcome to Tic-Tac-Toe</h1>
-        <h3 className = "playerOne">Player One</h3>
-        <h3 className = "playerTwo">Player Two</h3>
+        <h3 className = "playerOne">X Starts</h3>
+
         <div className ="gameBoard">{square}</div>
       </div>
     )
